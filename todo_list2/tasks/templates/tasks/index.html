@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        {{form.title}}
+        <input type="submit" name="Create">
+    </form>
+    {% for task in tasks %}
+    <div>
+        <a href="{% url 'update_task' task.id %}">Update</a>
+        <a href="{% url 'delete_task' task.id %}">Delete</a>
+        {% if task.complete %}
+            <strike><p>{{task}}</p></strike>
+        {% else %}
+            <p>{{task}}</p>
+        {% endif %}
+
+
+    </div>
+    {% endfor %}
+</body>
+</html>
