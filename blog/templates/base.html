@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Blog</title>
+      <link rel="stylesheet" href="{% static 'styles.css' %}">
+  </head>
+  <body>
+    <header class="wrapper">
+        <nav>
+          <ul>
+              {% if user.is_authenticated %}
+              <li>
+                  <form class="logout_link" action="{% url 'accounts:logout' %}" method="post">
+                      <button type="submit">LOGOUT</button>
+                  </form>
+              </li>
+              <li><a href="{% url 'articles:create' %}" class="highlight">CREATE ARTICLE</a></li>
+              {% else %}
+                <li><a href="{% url 'accounts:login' %}">LOGIN</a></li>
+                <li><a href="{% url 'accounts:signup' %}">SIGNUP</a></li>
+              {% endif %}
+          </ul>
+      </nav>
+    </header>
+    <div class="wrapper">
+        {% block content%}
+
+        {% endblock %}
+    </div>
+  </body>
+</html>
